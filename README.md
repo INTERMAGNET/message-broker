@@ -47,22 +47,36 @@ overhead.
 
 ```json
 {
-    'observatory': 'OBS',
-    'instrument': 'INSTRUMENT',
-    'type': 'TYPE'
+  "observatory": "BOU",
+  "instrument": "variometer",
+  "type": "variation",
 
-    'starttime': Date,
-    'delta': Float,
+  "starttime": "2017-09-05T00:00:00.000Z",
+  "delta": 1,
 
-    'data': {
-        'COMPONENT': [
-            Float,
-            Float,
-            ...
-        ]
-    }
+  "data": {
+    "X": [
+      20542.04,
+      20541.486,
+      20542.067
+    ]
+  }
 }
 ```
+
+- `observatory` - INTERMAGNET observatory code
+- `instrument` - type of instrument producing data (or actual instrument);
+  to identify the source of data at an observatory
+- `type` - type of data (for near-real time context this is almost always `variation`)
+- `starttime` - time of first data sample
+- `delta` - time between data samples
+- `data` - data samples
+  - keys are components, multiple components may be included but must share the same
+    `instrument`, `type`, `starttime` and `delta`
+  - values are sample values.  There should generally not be any gaps in this context
+    (those would be better handled different messages),
+    but if there are they should be represented as `null`.
+
 
 
 ## Topic format
